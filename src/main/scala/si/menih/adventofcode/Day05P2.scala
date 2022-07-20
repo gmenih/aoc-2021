@@ -28,8 +28,7 @@ case class Line(
   val lines = for (line <- inputLines) yield line match
     case s"$x1,$y1 -> $x2,$y2" => Line(x1.toInt, y1.toInt, x2.toInt, y2.toInt)
 
-  val intersectionPoints = (for (l1 <- lines) yield l1.toPoints).flatten
   val multiIntersectionCount =
-    intersectionPoints.groupBy(identity).map((a, b) => b.size).filter(_ > 1).size
+    lines.map(_.toPoints).groupBy(identity).map((a, b) => b.size).filter(_ > 1).size
 
   println(s"Solution: $multiIntersectionCount")
